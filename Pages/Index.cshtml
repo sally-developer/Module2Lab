@@ -1,0 +1,44 @@
+﻿
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "MPG Calculator";
+}
+<!-- Create a form that includes:
+An input field for miles driven
+An input field for gallons used
+A submit button to calculate MPG
+A section to display the calculated result -->
+<div class="text-center">
+    <h1 class="display-4">Miles Per Gallon Calculator</h1>
+    <p>Enter your trip details below to calculate your fuel efficiency.</p>
+
+    <!-- Form posts back to this same page -->
+    <form method="post">
+        <div class="form-group mb-3">
+            <label asp-for="MilesDriven">Miles Driven</label>
+            <input asp-for="MilesDriven" class="form-control" step="any" placeholder="Enter miles driven" required />
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="GallonsUsed">Gallons Used</label>
+            <input asp-for="GallonsUsed" class="form-control" step="any" placeholder="Enter gallons used" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Calculate MPG</button>
+    </form>
+
+    <!-- Only show the result section after a calculation has happened -->
+    @if (Model.Mpg.HasValue)
+    {
+        <div class="alert alert-success mt-4">
+            <h3>Result</h3>
+            <p>
+                You drove @Model.MilesDriven miles using @Model.GallonsUsed gallons of fuel.
+            </p>
+            <p>
+                <strong>Your MPG: @Model.Mpg.Value.ToString("F2")</strong>
+            </p>
+        </div>
+    }
+</div>
